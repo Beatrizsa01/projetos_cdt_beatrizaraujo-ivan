@@ -78,16 +78,17 @@ def identificar_responsavel(texto):
         r"\bé\s+para\s+(?:o|a)?\s*([A-Za-zÀ-ÿ]+)"
     ]
 
+    
     proibidas = {
-        "fazer", "faça", "faca", "precisa", "deve", "vai",
-        "entregar", "enviar", "realizar", "preparar", "criar",
-        "organizar", "finalizar", "relatório", "relatorio",
-        "documento", "planilha", "arquivo", "projeto", "tarefa",
-        "cliente", "reunião", "reuniao", "pagamento", "sistema",
-        "código", "codigo", "hoje", "amanhã", "amanha", "sexta",
-        "segunda", "terça", "terca", "quarta", "quinta", "sábado",
-        "sabado", "domingo", "urgente", "importante", "até", "ate",
-        "para", "com", "de", "do", "da"
+            "fazer", "faça", "faca", "precisa", "deve", "vai",
+             "enviar", "preparar", "criar",
+             "finalizar", "relatório", "relatorio",
+            "documento", "planilha", "arquivo", "projeto", "tarefa",
+            "cliente", "reunião", "reuniao", "pagamento", "sistema",
+            "código", "codigo", "hoje", "amanhã", "amanha", "sexta",
+            "segunda", "terça", "terca", "quarta", "quinta", "sábado",
+            "sabado", "domingo", "urgente", "importante", "até", "ate",
+            "para", "com", "de", "do", "da"
     }
 
     for padrao in padroes:
@@ -272,6 +273,7 @@ def identificar_prioridade(texto):
         "prioridade",
         "atenção",
         "atencao"
+        "organizar"
     ]
 
     if any(p in texto for p in alta):
@@ -288,7 +290,7 @@ def identificar_categoria(texto):
 
     if any(p in texto for p in [
         "relatório", "relatorio", "documento",
-        "planilha", "arquivo", "pdf"
+        "planilha", "arquivo", "pdf", "organizar"
     ]):
         return "DOCUMENTOS"
 
@@ -298,7 +300,7 @@ def identificar_categoria(texto):
         return "REUNIÃO"
 
     if any(p in texto for p in [
-        "cliente", "venda", "vendas", "proposta"
+        "cliente", "venda", "vendas", "proposta", "organizar"
     ]):
         return "CLIENTE / VENDAS"
 
@@ -311,7 +313,7 @@ def identificar_categoria(texto):
     if any(p in texto for p in [
         "programar", "programação", "programacao",
         "código", "codigo", "sistema",
-        "software", "computador"
+        "software", "computador" "organizar"
     ]):
         return "TECNOLOGIA"
 
@@ -327,6 +329,7 @@ def criar_titulo(texto):
         "por favor",
         "favor",
         "quero que"
+        "organizar feira tech"
     ]:
 
         if titulo.lower().startswith(inicio):
